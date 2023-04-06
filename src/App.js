@@ -5,6 +5,8 @@ import Notes from "./components/Notes"
 import Users from "./components/Users"
 import Login from "./components/Login"
 import Home from "./components/Home"
+import { Alert } from "react-bootstrap"
+import Menu from "./components/Menu"
 
 const App = () => {
   const [notes, setNotes] = useState([
@@ -28,9 +30,14 @@ const App = () => {
     }
   ])
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
 
   const login = (user) => {
     setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
   }
 
   const padding = {
@@ -43,18 +50,9 @@ const App = () => {
     : null
 
   return (
-    <div>
-      <div>
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/users">users</Link>
-        {
-          user
-            ? <em>{user} logged in</em>
-            : <Link style={padding} to="/login">login</Link>
-        }
-      </div>
-
+    <div className="container">
+      {(message && <Alert variant="success">{message}</Alert>)}
+      <Menu user={user} />
       <Routes>
         <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path="/notes" element={<Notes notes={notes} />} />
