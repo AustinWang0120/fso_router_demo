@@ -5,8 +5,8 @@ import Notes from "./components/Notes"
 import Users from "./components/Users"
 import Login from "./components/Login"
 import Home from "./components/Home"
-import { Alert } from "react-bootstrap"
 import Menu from "./components/Menu"
+import { Alert, Container } from "@mui/material"
 
 const App = () => {
   const [notes, setNotes] = useState([
@@ -49,9 +49,30 @@ const App = () => {
     ? notes.find(note => note.id === Number(match.params.id))
     : null
 
+  // bootstrap
+  // return (
+  //   <div className="container">
+  //     {(message && <Alert variant="success">{message}</Alert>)}
+  //     <Menu user={user} />
+  //     <Routes>
+  //       <Route path="/notes/:id" element={<Note note={note} />} />
+  //       <Route path="/notes" element={<Notes notes={notes} />} />
+  //       <Route path="/users" element={user ? <Users /> : <Navigate replace to={"/login"} />} />
+  //       <Route path="/login" element={<Login onLogin={login} />} />
+  //       <Route path="/" element={<Home />} />
+  //     </Routes>
+
+  //     <footer>
+  //       <br />
+  //       <em>Note app, by Austin Wang</em>
+  //     </footer>
+  //   </div>
+  // )
+
+  // material ui
   return (
-    <div className="container">
-      {(message && <Alert variant="success">{message}</Alert>)}
+    <Container>
+      {(message && <Alert severity="success">{message}</Alert>)}
       <Menu user={user} />
       <Routes>
         <Route path="/notes/:id" element={<Note note={note} />} />
@@ -65,7 +86,7 @@ const App = () => {
         <br />
         <em>Note app, by Austin Wang</em>
       </footer>
-    </div>
+    </Container>
   )
 }
 
